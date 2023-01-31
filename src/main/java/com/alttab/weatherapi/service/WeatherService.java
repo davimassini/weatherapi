@@ -9,14 +9,19 @@ import java.util.Date;
 
 public class WeatherService {
 
+    private WeatherService() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static WeatherDto getWeather(WeatherAPI weatherAPI) throws ParseException {
         WeatherDto response = new WeatherDto();
-        response.setHour(transformDateToHour(weatherAPI.getLocation().getLocaltime()));
+        response.setHour(dateToHour(weatherAPI.getLocation().getLocaltime()));
+        response.setWind(windKphToScale(weatherAPI.getCurrent().getWind_kph()));
 
         return response;
     }
 
-    public static double transformDateToHour(String localtime) throws ParseException {
+    private static double dateToHour(String localtime) throws ParseException {
         Date actualDay = new SimpleDateFormat("yyyy-MM-dd").parse(localtime);
         Date actualDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(localtime);
 
@@ -25,5 +30,13 @@ public class WeatherService {
         String formatHourInString = String.format("0.%d", (int) (secondsInDay / dayDividedInThousand));
 
         return Double.parseDouble(formatHourInString);
+    }
+
+    private static double windKphToScale(double windKph) {
+        int maxWindKph = 61;
+        double windInScale = windKph / maxWindKph;
+        String removeWindDecimalPlaces = String.format("%.3g", windInScale).replace(",", ".");
+
+        return Double.parseDouble(removeWindDecimalPlaces);
     }
 }

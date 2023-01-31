@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.ParseException;
+
 @RestController
 public class WeatherController {
 
@@ -15,14 +17,14 @@ public class WeatherController {
 
     @GetMapping("/weather")
     public WeatherDto getWeather(@RequestParam(value = "city") String city,
-                                 @RequestParam(value = "apiKey") String apiKey) throws Exception {
+                                 @RequestParam(value = "apiKey") String apiKey) throws ParseException {
         try {
             RestTemplate restTemplate = new RestTemplate();
             WeatherAPI weatherAPI = restTemplate.getForObject(WEATHER_API_URL, WeatherAPI.class, city, apiKey);
             assert weatherAPI != null;
             return WeatherService.getWeather(weatherAPI);
-        } catch (Exception e) {
-            throw new Exception(e);
+        } catch (ParseException e) {
+            throw new ParseException("Error - ", e.getErrorOffset());
         }
     }
 }
