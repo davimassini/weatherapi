@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.alttab.weatherapi.domain.utils.FogGroup.groupFogCondition;
 import static com.alttab.weatherapi.domain.utils.WeatherGroup.groupWeatherCondition;
 
 public class WeatherService {
@@ -25,6 +26,7 @@ public class WeatherService {
         response.setHour(dateToHour(locationDto.getLocaltime()));
         response.setRain(codeToRain(currentDto.getCondition().getCode()));
         response.setWind(windKphToScale(currentDto.getWind_kph()));
+        response.setFog(codeToFog(currentDto.getCondition().getCode()));
         response.setLightning(codeToLightning(currentDto.getCondition().getCode()));
         response.setTempCelsius(currentDto.getTemp_c());
         response.setDate(formatDate(locationDto.getLocaltime_epoch()));
@@ -59,6 +61,13 @@ public class WeatherService {
         String removeWindDecimalPlaces = String.format("%.3g", windInScale).replace(",", ".");
 
         return Double.parseDouble(removeWindDecimalPlaces);
+    }
+
+    private static double codeToFog(int code) {
+        return switch (groupFogCondition(code)) {
+            case MIST -> 0.5;
+            case FOG -> 1;
+        };
     }
 
     private static double codeToLightning(int code) {
