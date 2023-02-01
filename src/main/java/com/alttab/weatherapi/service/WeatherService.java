@@ -13,7 +13,6 @@ import static com.alttab.weatherapi.domain.utils.FogGroup.groupFogCondition;
 import static com.alttab.weatherapi.domain.utils.WeatherGroup.groupWeatherCondition;
 
 public class WeatherService {
-
     private WeatherService() {
         throw new IllegalStateException("Utility class");
     }
@@ -47,7 +46,7 @@ public class WeatherService {
 
     private static double codeToRain(int code) {
         return switch (groupWeatherCondition(code)) {
-            case CLEAR -> 0;
+            case CLEAR, UNDEFINED -> 0.0;
             case LIGHT_RAIN -> 0.3;
             case MODERATE_RAIN -> 0.5;
             case HEAVY_RAIN -> 0.85;
@@ -65,6 +64,7 @@ public class WeatherService {
 
     private static double codeToFog(int code) {
         return switch (groupFogCondition(code)) {
+            case UNDEFINED -> 0.0;
             case MIST -> 0.5;
             case FOG -> 1;
         };

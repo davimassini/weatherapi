@@ -1,10 +1,6 @@
 package com.alttab.weatherapi.domain.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherDto {
-
     private double hour;
     private double rain;
     private double wind;

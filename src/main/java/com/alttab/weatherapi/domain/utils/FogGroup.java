@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FogGroup {
-
     private FogGroup() {
         throw new IllegalStateException("Utility class");
     }
@@ -22,6 +21,6 @@ public class FogGroup {
     }
 
     public static FogConditionEnum groupFogCondition(int code) {
-        return codeToGroup.get(code);
+        return codeToGroup.get(code) != null ? codeToGroup.get(code) : FogConditionEnum.UNDEFINED;
     }
 }

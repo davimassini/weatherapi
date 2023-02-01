@@ -1,7 +1,6 @@
 package com.alttab.weatherapi.domain.dto;
 
 public class LocationDto {
-
     private String name;
     private String region;
     private String country;

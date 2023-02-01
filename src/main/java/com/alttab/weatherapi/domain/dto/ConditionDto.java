@@ -1,7 +1,6 @@
 package com.alttab.weatherapi.domain.dto;
 
 public class ConditionDto {
-
     private String text;
     private String icon;
     private Integer code;

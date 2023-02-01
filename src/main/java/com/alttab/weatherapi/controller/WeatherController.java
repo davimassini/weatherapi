@@ -12,7 +12,6 @@ import java.text.ParseException;
 
 @RestController
 public class WeatherController {
-
     private static final String WEATHER_API_URL = "http://api.weatherapi.com/v1/current.json?q={city}&key={apiKey}";
 
     @GetMapping("/weather")

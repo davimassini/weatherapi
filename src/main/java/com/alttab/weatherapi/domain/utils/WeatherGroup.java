@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class WeatherGroup {
-
     private WeatherGroup() {
         throw new IllegalStateException("Utility class");
     }
@@ -49,6 +48,6 @@ public class WeatherGroup {
     }
 
     public static WeatherConditionEnum groupWeatherCondition(int code) {
-        return codeToGroup.get(code);
+        return codeToGroup.get(code) != null ? codeToGroup.get(code) : WeatherConditionEnum.UNDEFINED;
     }
 }

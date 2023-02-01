@@ -5,5 +5,6 @@ public enum WeatherConditionEnum {
     LIGHT_RAIN,
     MODERATE_RAIN,
     HEAVY_RAIN,
-    THUNDER_RAIN
+    THUNDER_RAIN,
+    UNDEFINED
 }
