@@ -1,11 +1,15 @@
 package com.alttab.weatherapi.service;
 
+import com.alttab.weatherapi.domain.dto.CurrentDto;
+import com.alttab.weatherapi.domain.dto.LocationDto;
 import com.alttab.weatherapi.domain.dto.WeatherDto;
 import com.alttab.weatherapi.domain.rest.WeatherAPI;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.alttab.weatherapi.domain.utils.WeatherGroup.groupWeatherCondition;
 
 public class WeatherService {
 
@@ -14,9 +18,13 @@ public class WeatherService {
     }
 
     public static WeatherDto getWeather(WeatherAPI weatherAPI) throws ParseException {
+        CurrentDto currentDto = weatherAPI.getCurrent();
+        LocationDto locationDto = weatherAPI.getLocation();
+
         WeatherDto response = new WeatherDto();
-        response.setHour(dateToHour(weatherAPI.getLocation().getLocaltime()));
-        response.setWind(windKphToScale(weatherAPI.getCurrent().getWind_kph()));
+        response.setHour(dateToHour(locationDto.getLocaltime()));
+        response.setRain(codeToCondition(currentDto.getCondition().getCode()));
+        response.setWind(windKphToScale(currentDto.getWind_kph()));
 
         return response;
     }
@@ -30,6 +38,16 @@ public class WeatherService {
         String formatHourInString = String.format("0.%d", (int) (secondsInDay / dayDividedInThousand));
 
         return Double.parseDouble(formatHourInString);
+    }
+
+    private static double codeToCondition(int code) {
+        return switch (groupWeatherCondition(code)) {
+            case CLEAR -> 0;
+            case LIGHT_RAIN -> 0.3;
+            case MODERATE_RAIN -> 0.5;
+            case HEAVY_RAIN -> 0.85;
+            case THUNDER_RAIN -> 1;
+        };
     }
 
     private static double windKphToScale(double windKph) {
