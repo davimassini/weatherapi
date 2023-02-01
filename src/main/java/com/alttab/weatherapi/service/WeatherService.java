@@ -23,8 +23,11 @@ public class WeatherService {
 
         WeatherDto response = new WeatherDto();
         response.setHour(dateToHour(locationDto.getLocaltime()));
-        response.setRain(codeToCondition(currentDto.getCondition().getCode()));
+        response.setRain(codeToRain(currentDto.getCondition().getCode()));
         response.setWind(windKphToScale(currentDto.getWind_kph()));
+        response.setLightning(codeToLightning(currentDto.getCondition().getCode()));
+        response.setTempCelsius(currentDto.getTemp_c());
+        response.setDate(formatDate(locationDto.getLocaltime_epoch()));
 
         return response;
     }
@@ -40,7 +43,7 @@ public class WeatherService {
         return Double.parseDouble(formatHourInString);
     }
 
-    private static double codeToCondition(int code) {
+    private static double codeToRain(int code) {
         return switch (groupWeatherCondition(code)) {
             case CLEAR -> 0;
             case LIGHT_RAIN -> 0.3;
@@ -56,5 +59,18 @@ public class WeatherService {
         String removeWindDecimalPlaces = String.format("%.3g", windInScale).replace(",", ".");
 
         return Double.parseDouble(removeWindDecimalPlaces);
+    }
+
+    private static double codeToLightning(int code) {
+        return switch (code) {
+            case 1273 -> 0.5;
+            case 1276 -> 1;
+            default -> 0.0;
+        };
+    }
+
+    private static String formatDate(int date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return simpleDateFormat.format(new Date((long) date * 1000));
     }
 }
