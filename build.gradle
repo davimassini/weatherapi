@@ -25,6 +25,6 @@ tasks.named('test') {
 
 tasks.jar {
 	manifest {
-		attributes["Main-Class"] = "com.alttab.weatherapi.main"
+		attributes["Main-Class"] = "com.alttab.weatherapi.WeatherapiApplication"
 	}
 }
