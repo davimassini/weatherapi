@@ -2,8 +2,8 @@ package com.alttab.weatherapi.service;
 
 import com.alttab.weatherapi.domain.dto.CurrentDto;
 import com.alttab.weatherapi.domain.dto.LocationDto;
+import com.alttab.weatherapi.domain.response.WeatherResponse;
 import com.alttab.weatherapi.domain.dto.WeatherDto;
-import com.alttab.weatherapi.domain.rest.WeatherAPI;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,11 +17,11 @@ public class WeatherService {
         throw new IllegalStateException("Utility class");
     }
 
-    public static WeatherDto getWeather(WeatherAPI weatherAPI) throws ParseException {
-        CurrentDto currentDto = weatherAPI.getCurrent();
-        LocationDto locationDto = weatherAPI.getLocation();
+    public static WeatherResponse getWeather(WeatherDto weatherDto) throws ParseException {
+        CurrentDto currentDto = weatherDto.getCurrent();
+        LocationDto locationDto = weatherDto.getLocation();
 
-        WeatherDto response = new WeatherDto();
+        WeatherResponse response = new WeatherResponse();
         response.setHour(dateToHour(locationDto.getLocaltime()));
         response.setRain(codeToRain(currentDto.getCondition().getCode()));
         response.setWind(windKphToScale(currentDto.getWind_kph()));

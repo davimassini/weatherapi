@@ -1,17 +1,17 @@
 
 ![WeatherAPI - Logo](https://i.imgur.com/6C0kDoF.gif)
-# 🌦️ WeatherAPI[](#-weatherapi-)
+# 🌦️ WeatherAPI[](#-weatherapi)
 First of all, that project is a huge over-engineering and the purpose of this is to be a showcase. If you're interested in an open-source weather API for your game or something like that, and ocasionally dropped here, keep searching.
 
 The history behind this: I was going to the gym when I walked through my friend who was watching some Tarkov video and said about the feature in the game which makes rain when Tarkov's rain in real life. My first reaction was to say that it didn't seem like a difficult system to implement and that it would be a nice personal challenge to do something like that. So I did it.
 
 WeatherAPI uses [WeatherAPI](https://www.weatherapi.com/) - yeah, look how creative I'm at creating names 😆 - to get the real statics of the world. For personal projects, the standard version is more than enough.
 
-Don't forget to check the [acknowledgments](#acknowledgments).
+Don't forget to check the [acknowledgments](#%EF%B8%8F-acknowledgments).
 
 ## ⚙️ Run it[](#-run-it)
 
-No big deal. Just be sure you had all the [requirements](#requirements), then run the task **:bootRun** in Gradle.
+No big deal. Just be sure you had all the [requirements](#-requirements), then run the task **:bootRun** in Gradle.
 
 ## 📑 Requirements[](#-requirements)
 
@@ -37,7 +37,7 @@ No big deal. Just be sure you had all the [requirements](#requirements), then ru
 
 ![](https://i.imgur.com/H3D6Wre.gif)
 
-You can also test this [here](#).
+You can also test this [here](https://simmer.io/@davimassini/weatherapi).
 
 ## 📈 Improvements[](#-improvements)
 

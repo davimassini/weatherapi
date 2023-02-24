@@ -1,0 +1,3 @@
+Copyright © 2023 - [davimassini](https://github.com/davimassini)
+
+A permissão é concedida, gratuitamente, a qualquer pessoa que obtenha uma cópia deste arquivo, com restrição de publicar como SEU repositório. Porém, sem restrição nos direitos de usar, copiar, modificar e mesclar. Há ainda o cuidado de não utilizar as logos, imagens e font dentro do repositório, que representam uma empresa real com direitos autorais.
